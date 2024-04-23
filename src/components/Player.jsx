@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 
-const Player = ({ name, symbol }) => {
+const Player = ({ name, symbol, isActive }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [playername ,setPlayername] = useState(name)
+  const [playername, setPlayername] = useState(name);
 
   const handleEditClick = () => {
     // setIsEditing(isEditing ? false : true);
@@ -14,18 +14,19 @@ const Player = ({ name, symbol }) => {
   };
 
   let playerName = <span className="player-name">{playername}</span>;
-  if (isEditing) playerName = <input type="text" required value={playername} onChange={handleChange}/>;
+  if (isEditing)
+    playerName = (
+      <input type="text" required value={playername} onChange={handleChange} />
+    );
 
   return (
-    <li>
+    <li className={isActive ? "active" : undefined}>
       <span className="player">
         {playerName}
         {/* <span className="player-name">{name}</span> */}
         <span className="player-symbol">{symbol}</span>
       </span>
-      <button onClick={handleEditClick} >
-        {isEditing ? "Save" : "Edit"}
-      </button>
+      <button onClick={handleEditClick}>{isEditing ? "Save" : "Edit"}</button>
     </li>
   );
 };

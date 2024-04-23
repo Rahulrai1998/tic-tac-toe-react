@@ -5,7 +5,7 @@ const initialGameBoard = [
   [null, null, null],
   [null, null, null],
 ];
-const GameBoard = () => {
+const GameBoard = ({ handleSelectActivePlayer, activePlayer }) => {
   const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   function handleSelectSquare(rowIndex, colIndex) {
@@ -14,13 +14,14 @@ const GameBoard = () => {
       const updatedBoard = [
         ...prevGameBoard.map((innerArray) => [...innerArray]),
       ];
-      updatedBoard[rowIndex][colIndex] = "X";
+      updatedBoard[rowIndex][colIndex] = activePlayer;
       return updatedBoard;
 
       //WRONG APPROACH
       //   prevGameBoard[rowIndex][colIndex] = "X";
       //   return prevGameBoard;
     });
+    handleSelectActivePlayer();
   }
 
   return (

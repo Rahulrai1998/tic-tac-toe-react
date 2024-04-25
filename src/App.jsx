@@ -26,7 +26,10 @@ function App() {
   const [gameTurns, setGameTurns] = useState([]);
   // const [activePlayer, setActivePlayer] = useState("X");
   const activePlayer = deriveActivePlayer(gameTurns);
-  const gameBoard = initialGameBoard;
+
+  //DEEP CLONING OF 2D ARRAY/OBJECTS
+  const gameBoard = [...initialGameBoard.map((array) => [...array])];
+  console.log(initialGameBoard);
   // DERIVING STATE
   for (const turn of gameTurns) {
     const { square, player } = turn;
@@ -66,6 +69,10 @@ function App() {
       return updatedTurns;
     });
   }
+
+  function handleRestart() {
+    setGameTurns((turn) => []);
+  }
   return (
     <main>
       <div id="game-container">
@@ -73,7 +80,9 @@ function App() {
           <Player name="Player 1" symbol="X" isActive={activePlayer === "X"} />
           <Player name="Player 2" symbol="O" isActive={activePlayer === "O"} />
         </ol>
-        {(winner || isDraw) && <GameOver winner={winner} />}
+        {(winner || isDraw) && (
+          <GameOver winner={winner} handleRestart={handleRestart} />
+        )}
         <GameBoard
           handleSelectActivePlayer={handleSelectActivePlayer}
           gameBoard={gameBoard}

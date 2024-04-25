@@ -1,19 +1,6 @@
 import React, { useState } from "react";
 
-const initialGameBoard = [
-  [null, null, null],
-  [null, null, null],
-  [null, null, null],
-];
-const GameBoard = ({ handleSelectActivePlayer, gameTurns }) => {
-  const gameBoard = initialGameBoard;
-  // DERIVING STATE
-  for (const turn of gameTurns) {
-    const { square, player } = turn;
-    const { row, col } = square;
-    gameBoard[row][col] = player;
-  }
-
+const GameBoard = ({ handleSelectActivePlayer, gameBoard }) => {
   // const [gameBoard, setGameBoard] = useState(initialGameBoard);
 
   // function handleSelectSquare(rowIndex, colIndex) {

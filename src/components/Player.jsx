@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const Player = ({ name, symbol, isActive }) => {
+const Player = ({ name, symbol, isActive, handlePlayersNameChange }) => {
   const [isEditing, setIsEditing] = useState(false);
   const [playername, setPlayername] = useState(name);
 
@@ -8,6 +8,10 @@ const Player = ({ name, symbol, isActive }) => {
     // setIsEditing(isEditing ? false : true);
     // setIsEditing(!isEditing); // react SCHEDULES a state update
     setIsEditing((editing) => !editing); // always gets the updated value of editing
+
+    if (isEditing) {
+      handlePlayersNameChange(symbol, playername);
+    }
   };
   const handleChange = (event) => {
     setPlayername(event.target.value);
